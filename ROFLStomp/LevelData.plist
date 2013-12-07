@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>1</key>
+	<dict>
+		<key>Elephants</key>
+		<array>
+			<array>
+				<integer>100</integer>
+				<integer>100</integer>
+			</array>
+		</array>
+		<key>Mouse Spawn Points</key>
+		<array>
+			<array>
+				<string>16</string>
+				<string>16</string>
+			</array>
+		</array>
+		<key>Enemies</key>
+		<array>
+			<array>
+				<string>Lion</string>
+				<integer>32</integer>
+				<integer>32</integer>
+			</array>
+		</array>
+	</dict>
+</dict>
+</plist>
