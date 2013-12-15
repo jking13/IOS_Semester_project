@@ -7,7 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-
-@interface Elephant : SKSpriteNode
-
+#import "BasicEntity.h"
+@interface Elephant : BasicEntity
+@property BOOL attacking;
 @end

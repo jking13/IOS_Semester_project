@@ -9,5 +9,9 @@
 #import "Mouse.h"
 
 @implementation Mouse
-
+-(void) initialize
+{
+    self.scaredElephants = [[NSMutableArray alloc]init];
+    self.movementSpeed = [NSNumber numberWithInt:150];
+}
 @end

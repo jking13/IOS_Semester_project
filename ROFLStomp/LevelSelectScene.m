@@ -31,6 +31,19 @@
         lvl1Label.fontSize = 10;
         lvl1Label.position = CGPointMake(lvl1Label.position.x, lvl1Label.position.y-5);
         
+        
+       SKSpriteNode *levelTwoButton =[SKSpriteNode spriteNodeWithImageNamed:@"buttonscale.png"];
+        levelTwoButton.name = @"LevelTwoButton";
+        levelTwoButton.position =CGPointMake(CGRectGetMidX(self.frame)+64, CGRectGetMidY(self.frame));
+        levelTwoButton.size = CGSizeMake(80, 32);
+        levelTwoButton.centerRect = CGRectMake(36.0/80.0,5.0/32.0,4.0/80.0,22.0/32.0);
+        [self addChild:levelTwoButton];
+        SKLabelNode *lvl2Label = [SKLabelNode labelNodeWithFontNamed:@"Times"];
+        [levelTwoButton addChild:lvl2Label];
+        lvl2Label.text = @"Level 2";
+        lvl2Label.fontSize = 10;
+        lvl2Label.position = CGPointMake(lvl2Label.position.x, lvl2Label.position.y-5);
+        
        
         
     }
@@ -40,22 +53,28 @@
     UITouch *touch = [touches anyObject];
     NSArray *nodes = [self nodesAtPoint:[touch locationInNode:self]];
     for (SKNode *node in nodes) {
+        NSNumber *level = [NSNumber alloc];
+        BOOL buttonPressed = false;
         if ([node.name isEqualToString:@"LevelOneButton"]) {
-            SKView * skView = (SKView *)self.view;
-            skView.showsFPS = YES;
-            skView.showsNodeCount = YES;
-            
-            // Create and configure the scene.
-            NSNumber *level = [NSNumber alloc];
             level = [level initWithInt:1];
-            LevelScene * scene = [LevelScene alloc];
-            scene.currentLevel = level;
-            //[scene.userData setObject:level forKey:@"current level"];
-            scene = [scene initWithSize:skView.bounds.size];
-            scene.scaleMode = SKSceneScaleModeAspectFill;
-            // Present the scene.
-            [skView presentScene:scene];
+            buttonPressed = true;
         }
+        else if ([node.name isEqualToString:@"LevelTwoButton"]) {
+            level = [level initWithInt:2];
+            buttonPressed = true;
+        }
+        if(!buttonPressed)
+            continue;
+        SKView * skView = (SKView *)self.view;
+        skView.showsFPS = YES;
+        skView.showsNodeCount = YES;
+        LevelScene * scene = [LevelScene alloc];
+        scene.currentLevel = level;
+        //[scene.userData setObject:level forKey:@"current level"];
+        scene = [scene initWithSize:skView.bounds.size];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
+        // Present the scene.
+        [skView presentScene:scene];
     }
 }
 

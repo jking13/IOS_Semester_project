@@ -1,13 +1,13 @@
 //
-//  Enemy.h
+//  GameOverScene.h
 //  ROFLStomp
 //
-//  Created by John King on 12/7/13.
+//  Created by John King on 12/15/13.
 //  Copyright (c) 2013 John King. All rights reserved.
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "BasicEntity.h"
-@interface Enemy : BasicEntity
+
+@interface GameOverScene : SKScene
 
 @end

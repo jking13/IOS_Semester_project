@@ -12,22 +12,40 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //load paths
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectoryPath = [paths objectAtIndex:0];
+    
+    //load saved user data
     NSString *plistFilePathInDocumentsDirectory = [documentsDirectoryPath stringByAppendingPathComponent:@"PlayerData.plist"];
     
     NSMutableDictionary *pdata = [[NSMutableDictionary alloc] initWithContentsOfFile:plistFilePathInDocumentsDirectory];
+    //if no saved data load default data
     if (!pdata) {
         NSString *plistFilePathInMainBundle = [[NSBundle mainBundle] pathForResource:@"PlayerData" ofType:@"plist"];
         
         pdata = [[NSMutableDictionary alloc] initWithContentsOfFile:plistFilePathInMainBundle];
     }
+    //load the level data
         NSString *plistFilePathInMainBundle = [[NSBundle mainBundle] pathForResource:@"LevelData" ofType:@"plist"];
         
         NSMutableDictionary *ldata = [[NSMutableDictionary alloc] initWithContentsOfFile:plistFilePathInMainBundle];
     
+    //load the enemy data
+    plistFilePathInMainBundle = [[NSBundle mainBundle] pathForResource:@"EnemyData" ofType:@"plist"];
+    
+    NSMutableDictionary *edata = [[NSMutableDictionary alloc] initWithContentsOfFile:plistFilePathInMainBundle];
+    
+    //load the projectile data
+    plistFilePathInMainBundle = [[NSBundle mainBundle] pathForResource:@"ProjectileData" ofType:@"plist"];
+    
+    NSMutableDictionary *projdata = [[NSMutableDictionary alloc] initWithContentsOfFile:plistFilePathInMainBundle];
+    
+    //set variables
     self.playerData = pdata;
     self.levelData = ldata;
+    self.enemyData = edata;
+    self.projectileData = projdata;
 
     
     return YES;

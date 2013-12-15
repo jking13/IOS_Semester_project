@@ -13,4 +13,6 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSMutableDictionary *playerData;
 @property (strong, nonatomic) NSMutableDictionary *levelData;
+@property (strong, nonatomic) NSMutableDictionary *enemyData;
+@property (strong, nonatomic) NSMutableDictionary *projectileData;
 @end
