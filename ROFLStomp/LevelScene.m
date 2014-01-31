@@ -31,7 +31,6 @@
 
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
-        
         //initialize properties
         self.healthbarWidth = 60;
         self.gameover = false;
@@ -49,6 +48,7 @@
         SKSpriteNode *sn = [SKSpriteNode spriteNodeWithImageNamed:@"mainbackgroundnotext.png"];
         sn.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         sn.name = @"BACKGROUND";
+        sn.xScale = size.width/480;
         [self addChild:sn];
         
         //bring in data
@@ -69,6 +69,9 @@
     }
     return self;
 }
+- (void)didMoveToView:(SKView *)view {
+    self.view.paused = NO;
+}
 //function called when the level is over
 -(void) endLevel
 {
@@ -82,8 +85,6 @@
     }
     [self runAction: fadeAway completion:^{
         SKView * skView = (SKView *)self.view;
-        skView.showsFPS = YES;
-        skView.showsNodeCount = YES;
         // Create and configure the scene.
         SKScene * scene = [LevelSelectScene sceneWithSize:skView.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
@@ -107,6 +108,9 @@
     
     //checks if a mouse should scare an elephant
     for (Elephant *elephant in self.Elephants) {
+        CFTimeInterval timeSinceLast = currentTime - elephant.lastUpdateTimeInterval;
+        [elephant updateWithTimeSinceLastUpdate:timeSinceLast];
+        elephant.lastUpdateTimeInterval = currentTime;
         float distance = 50;
         CGPoint elephantCenter = elephant.position;
         for (Mouse *mouse in self.Mice) {
@@ -168,6 +172,7 @@
                     [self.Enemies removeObject:enemy];
                     elephant.attacking = false;
                     [self animateEntity:elephant];
+                    [self.playerData setObject:[NSNumber numberWithInt:[[self.playerData objectForKey:@"Money"] intValue]+[enemy.moneyValue intValue]] forKey:@"Money"];
                 }];
             }
          
@@ -379,7 +384,7 @@
         enemy.maxHealth = [prototype objectAtIndex:1];
         enemy.health = [NSNumber numberWithInt:[enemy.maxHealth intValue]];
         enemy.shouldFire = FALSE;
-        
+        enemy.moneyValue = [prototype objectAtIndex:7];
         //set the enemy's projectile data
         if(enemy.hasProjectile)
         {
@@ -388,6 +393,9 @@
             Projectile *projectile = [Projectile spriteNodeWithImageNamed:[newProjectileData objectAtIndex:0]];
             projectile.movementSpeed = [newProjectileData objectAtIndex:1];
             projectile.damage = [newProjectileData objectAtIndex:2];
+            projectile.explosive = [newProjectileData objectAtIndex:3];
+            if(![projectile.explosive boolValue]&&[[[self.playerData objectForKey:@"Armor"] objectAtIndex:2] boolValue])
+                projectile.damage = [NSNumber numberWithInt:[projectile.damage intValue]/2];
             projectile.projectileImageName = [newProjectileData objectAtIndex:0];
             enemy.projectile = projectile;
         }
@@ -433,14 +441,24 @@
         elephant.position = CGPointMake([x floatValue], [y floatValue]);
         NSNumber *health = [NSNumber numberWithInt:20];
         NSNumber *maxHealth = [NSNumber numberWithInt:20];
-        NSNumber *movementSpeed = [NSNumber numberWithInt:50];
         elephant.health = health;
         elephant.maxHealth = maxHealth;
-        [elephant initializeData:health :movementSpeed];
         [self.Elephants addObject:elephant];
         [self addChild:elephant];
-        elephant.movementSpeed = [NSNumber numberWithInt:20];
+        elephant.movementSpeed = [NSNumber numberWithInt:10];
+        [self applyUpgradesToElephant:elephant];
         [self animateEntity:elephant];
+    }
+}
+//turns on elephant upgrades
+-(void) applyUpgradesToElephant: (Elephant *)elephant
+{
+    NSMutableArray *upgrade = [self.playerData objectForKey:@"Double Health"];
+    NSNumber *equipped = [upgrade objectAtIndex:2];
+    if([equipped boolValue])
+    {
+        elephant.health = [NSNumber numberWithInt:[elephant.health intValue]*2];
+        elephant.maxHealth = [NSNumber numberWithInt:[elephant.health intValue]];
     }
 }
 //called when the movement is done, restarts the movement
@@ -454,10 +472,12 @@
 {
     CGSize winSize = self.screenSize;
     int distance = 20;
-    float actualDuration =  [entity.movementSpeed floatValue]/distance;
+    float actualDuration =  distance/[entity.movementSpeed floatValue];
     if([entity.scaredCount intValue]>0)
     {
-        actualDuration = [entity.movementSpeed floatValue]/40;
+        actualDuration = distance/[entity.movementSpeed floatValue]/3;
+        if([[[self.playerData objectForKey:@"Scary Mice"] objectAtIndex:2] boolValue])
+            actualDuration = actualDuration/2;
         entity.scaredCount = [NSNumber numberWithInt:[entity.scaredCount intValue]-1];
     }
     float newAngle = [entity getNextAngle];
@@ -473,7 +493,7 @@
     }];
 
 }
-
+//calculates the new position
 - (CGPoint) getNewPosition: (CGPoint) oldPosition : (float) newAngle : (int) distance
 {
     CGPoint newPosition;
@@ -481,6 +501,8 @@
     newPosition.x = cosf(newAngle)*distance+oldPosition.x;
     return newPosition;
 }
+
+//angle calculation
 -(float) angleBetweenPositions: (CGPoint) start : (CGPoint) end
 {
     float diffX = start.x - end.x;
@@ -488,7 +510,4 @@
     float angleDegrees = atan2f(diffY, diffX);
     return angleDegrees;
 }
-
-
-
 @end

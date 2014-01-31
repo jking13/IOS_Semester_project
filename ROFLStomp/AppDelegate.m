@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -58,6 +57,8 @@
     NSString *plistFilePathInDocumentsDirectory = [documentsDirectoryPath stringByAppendingPathComponent:@"PlayerData.plist"];
     
     [self.playerData writeToFile:plistFilePathInDocumentsDirectory atomically:YES];
+    SKView *view = (SKView *)self.window.rootViewController.view;
+    view.paused = YES;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -74,6 +75,8 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    SKView *view = (SKView *)self.window.rootViewController.view;
+    view.paused = NO;
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

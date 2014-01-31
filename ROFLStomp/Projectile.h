@@ -7,8 +7,8 @@
 //
 #import <SpriteKit/SpriteKit.h>
 @interface Projectile : SKSpriteNode
-@property (strong, nonatomic) NSNumber *damage;
-@property (strong, nonatomic) NSNumber *movementSpeed;
-@property (strong, nonatomic) NSString *projectileImageName;
--(void) initializeData: (NSNumber*) damage : (NSNumber*) movementSpeed;
+@property (strong, nonatomic) NSNumber *damage; //damage the projectile does
+@property (strong, nonatomic) NSNumber *movementSpeed;//the projectiles movement speed
+@property (strong, nonatomic) NSString *projectileImageName; //the name of its image file
+@property (strong, nonatomic) NSNumber *explosive;//true if it is explosive
 @end

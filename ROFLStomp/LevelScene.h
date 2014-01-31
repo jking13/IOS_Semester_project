@@ -16,10 +16,10 @@
 #import "LevelSelectScene.h"
 @interface LevelScene : SKScene
 
-@property (strong, nonatomic) NSNumber *currentLevel;
-@property (strong, nonatomic) NSMutableDictionary *playerData;
-@property (strong, nonatomic) NSMutableDictionary *levelData;
-@property (strong, nonatomic) NSDictionary *currentLevelData;
-@property (strong, nonatomic) NSMutableDictionary *enemyData;
-@property (strong, nonatomic) NSMutableDictionary *projectileData;
+@property (strong, nonatomic) NSNumber *currentLevel; //current level number
+@property (strong, nonatomic) NSMutableDictionary *playerData;//saved player info
+@property (strong, nonatomic) NSMutableDictionary *levelData;//all the level info
+@property (strong, nonatomic) NSDictionary *currentLevelData;////current level info
+@property (strong, nonatomic) NSMutableDictionary *enemyData;//all enemy info
+@property (strong, nonatomic) NSMutableDictionary *projectileData;//all projectile info
 @end

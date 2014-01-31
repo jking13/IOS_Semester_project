@@ -2,25 +2,60 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Tank</key>
+	<array>
+		<string>Tank.png</string>
+		<integer>20</integer>
+		<integer>5</integer>
+		<true/>
+		<real>0.5</real>
+		<integer>125</integer>
+		<string>Rocket</string>
+		<integer>500</integer>
+	</array>
+	<key>Soldier</key>
+	<array>
+		<string>Soldier.png</string>
+		<integer>20</integer>
+		<integer>20</integer>
+		<true/>
+		<real>1.25</real>
+		<integer>125</integer>
+		<string>Bullet</string>
+		<integer>250</integer>
+	</array>
+	<key>Poacher</key>
+	<array>
+		<string>Poacher.png</string>
+		<integer>20</integer>
+		<integer>15</integer>
+		<true/>
+		<real>1.25</real>
+		<integer>125</integer>
+		<string>Bullet</string>
+		<integer>100</integer>
+	</array>
 	<key>SpearVillager</key>
 	<array>
 		<string>SpearVillager.png</string>
 		<integer>20</integer>
-		<integer>20</integer>
+		<integer>15</integer>
 		<true/>
 		<real>0.75</real>
-		<integer>500</integer>
+		<integer>125</integer>
 		<string>Spear</string>
+		<integer>50</integer>
 	</array>
 	<key>Lion</key>
 	<array>
 		<string>Lion.png</string>
 		<integer>20</integer>
-		<integer>20</integer>
+		<integer>15</integer>
 		<false/>
 		<integer>0</integer>
 		<integer>0</integer>
 		<string></string>
+		<integer>10</integer>
 	</array>
 </dict>
 </plist>

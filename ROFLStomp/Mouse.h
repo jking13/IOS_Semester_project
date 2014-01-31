@@ -9,7 +9,7 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface Mouse : SKSpriteNode
-@property (strong, nonatomic) NSMutableArray *scaredElephants;
-@property (strong, nonatomic) NSNumber *movementSpeed;
+@property (strong, nonatomic) NSMutableArray *scaredElephants; //the list of elephants it has already scared
+@property (strong, nonatomic) NSNumber *movementSpeed; //its movement speed
 -(void) initialize;
 @end

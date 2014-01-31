@@ -9,5 +9,5 @@
 #import <SpriteKit/SpriteKit.h>
 #import "BasicEntity.h"
 @interface Elephant : BasicEntity
-@property BOOL attacking;
+@property BOOL attacking; //true if the elephant is currently attacking
 @end

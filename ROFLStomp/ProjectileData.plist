@@ -2,11 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Rocket</key>
+	<array>
+		<string>Rocket.png</string>
+		<integer>75</integer>
+		<integer>20</integer>
+		<true/>
+	</array>
+	<key>Bullet</key>
+	<array>
+		<string>Bullet.png</string>
+		<integer>500</integer>
+		<integer>6</integer>
+		<false/>
+	</array>
 	<key>Spear</key>
 	<array>
 		<string>Spear.png</string>
 		<integer>100</integer>
 		<integer>2</integer>
+		<false/>
 	</array>
 </dict>
 </plist>

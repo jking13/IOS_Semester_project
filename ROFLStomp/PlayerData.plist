@@ -2,6 +2,38 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Regen</key>
+	<array>
+		<integer>1000</integer>
+		<false/>
+		<false/>
+		<string>Regenerate Health:</string>
+		<string>Elephants regenerate health</string>
+	</array>
+	<key>Scary Mice</key>
+	<array>
+		<integer>3000</integer>
+		<false/>
+		<false/>
+		<string>Extra Scary Mice:</string>
+		<string>Elephants move twice as fast when scared</string>
+	</array>
+	<key>Armor</key>
+	<array>
+		<integer>2000</integer>
+		<false/>
+		<false/>
+		<string>Armored Elephant:</string>
+		<string>Elephants are resistant to non-explosives</string>
+	</array>
+	<key>Double Health</key>
+	<array>
+		<integer>500</integer>
+		<false/>
+		<false/>
+		<string>Double Elephant Health:</string>
+		<string>Double the health double the stomp!</string>
+	</array>
 	<key>Money</key>
 	<integer>0</integer>
 	<key>Level Unlocked</key>

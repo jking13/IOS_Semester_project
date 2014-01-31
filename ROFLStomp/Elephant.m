@@ -9,10 +9,4 @@
 #import "Elephant.h"
 
 @implementation Elephant
--(void) initializeData: (NSNumber*) health : (NSNumber*) movementSpeed
-{
-    [super initializeData:health :movementSpeed];
-    self.attacking = false;
-    self.scaredCount = [NSNumber numberWithInt:0];
-}
 @end

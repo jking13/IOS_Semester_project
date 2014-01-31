@@ -9,5 +9,5 @@
 #import <SpriteKit/SpriteKit.h>
 #import "BasicEntity.h"
 @interface Enemy : BasicEntity
-
+@property (strong, nonatomic) NSNumber *moneyValue; //the money gained by killing this enemy
 @end

@@ -10,20 +10,25 @@
 
 @implementation BasicEntity
 
--(void) initializeData: (NSNumber*) health : (NSNumber*) movementSpeed
-{
-    self.movementSpeed = movementSpeed;
-    self.health = health;
-    self.scaredCount = [NSNumber numberWithInt:0];
-}
+//updates time dependent data
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
     
     self.lastProjectileTimeInterval += timeSinceLast;
+    self.lastRegenTimeInterval += timeSinceLast;
     if (self.lastProjectileTimeInterval > 1.0/[self.fireRate floatValue]) {
         self.lastProjectileTimeInterval = 0.0;
         self.shouldFire = true;
     }
+    if(self.lastRegenTimeInterval > 1.0)
+    {
+        self.lastRegenTimeInterval = 0.0;
+        self.health = [NSNumber numberWithInt:[self.health intValue]+5];
+        if ([self.health intValue]>[self.maxHealth intValue]) {
+            self.health = [NSNumber numberWithInt:[self.maxHealth intValue]];
+        }
+    }
 }
+//returns the next angle at which it should move, is semi-random movement
 -(float) getNextAngle
 {
     if([self.scaredCount intValue]>0)
@@ -31,11 +36,12 @@
         return self.zRotation;
     }
     int rand = arc4random()%10;
+    //same angle
     if(rand<3)
     {
         return self.zRotation;
     }
-    //if(rand <7)
+    //within 90 degrees of current angle
     else
     {
         int sign = 1;
@@ -48,30 +54,6 @@
         offset = offset * sign * M_PI/4;
         return offset+self.zRotation;
     }
-   /* if (rand<9) {
-        int sign = 1;
-        if(arc4random()%2)
-        {
-            sign = -1;
-        }
-        
-        float offset = (arc4random()%100)/100.0f;
-        offset = offset * sign * M_PI/4;
-        offset = offset + M_PI/4 * sign;
-        return offset+self.zRotation;
-    }
-    else
-    {
-        int sign = 1;
-        if(arc4random()%2)
-        {
-            sign = -1;
-        }
-        
-        float offset = (arc4random()%100)/100.0f;
-        offset = offset * sign * M_PI/2;
-        offset = offset + M_PI/2 * sign;
-        return offset+self.zRotation;
-    }*/
+
 }
 @end

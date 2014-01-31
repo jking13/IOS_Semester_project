@@ -8,6 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 #import "LevelSelectScene.h"
+#import "UpgradesScene.h"
 @interface MainMenuScene : SKScene
 
 @end

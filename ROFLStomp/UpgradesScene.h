@@ -7,7 +7,8 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-
+#import "AppDelegate.h"
+#import "MainMenuScene.h"
 @interface UpgradesScene : SKScene
-
+@property (strong, nonatomic) NSMutableDictionary *playerData;//all the player info
 @end
